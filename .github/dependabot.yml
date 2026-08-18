@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    # Skip releases younger than this many days; a freshly poisoned
+    # version is usually yanked within hours or days. Range 1-90.
+    cooldown:
+      default-days: 7
+
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
