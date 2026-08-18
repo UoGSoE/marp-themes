@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720">
+  <rect width="720" height="720" fill="#141414"/>
+  <g fill="none" stroke="#242424" stroke-width="2">
+    <path d="M0 90h720M0 180h720M0 270h720M0 360h720M0 450h720M0 540h720M0 630h720"/>
+    <path d="M90 0v720M180 0v720M270 0v720M360 0v720M450 0v720M540 0v720M630 0v720"/>
+  </g>
+  <text x="360" y="480" font-family="Menlo, monospace" font-size="420" font-weight="bold" fill="#F0362A" text-anchor="middle">*</text>
+  <text x="360" y="620" font-family="Menlo, monospace" font-size="34" font-weight="bold" fill="#8A8A8A" text-anchor="middle">[image](goes-here.jpg)</text>
+</svg>

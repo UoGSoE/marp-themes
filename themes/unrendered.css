@@ -1,0 +1,530 @@
+/* @theme unrendered */
+
+/*
+ * Unrendered - a Marp theme that never got round to rendering the markdown.
+ * Black slides, heavy mono, one hard red. Headings keep their #, bullets
+ * keep their *, links keep their [brackets](and-hrefs).
+ *
+ * Based on a 2023 Keynote deck ("AI & Us") - raw-markdown-as-design.
+ *
+ * Notes for authors:
+ * - Link hrefs are shown literally on the slide, so write them to be read:
+ *   [Ada](ada@example.com) not [Ada](mailto:ada@example.com).
+ * - Use ```console fences for shell examples to get the red $ prompt.
+ * - Bold (asterisk-asterisk) goes red; _em_ goes heavy white. A bolded
+ *   mid-word slash is not valid CommonMark - put spaces round it:
+ *   "remarks / quotes" with the slash bolded works, unspaced does not.
+ * - Classes: title (tilted red banner over a right-hand image - use a
+ *   normal ![](img) on that slide, not bg right), lead (centred, drops
+ *   the # conceit), quotes (staggered pull-quotes), cols, light.
+ */
+
+@import 'default';
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&display=swap');
+
+:root {
+  /* Palette: black, white, one red */
+  --bg: #050505;
+  --fg: #F4F4F4;
+  --fg-dim: #C9C9C9;
+  --muted: #8A8A8A;
+  --faint: #4E4E4E;
+  --accent: #F0362A;
+
+  /* Default theme paints strong inside h2-h6 blue via this variable */
+  --heading-strong-color: var(--accent);
+
+  /* Override default Marp theme variables */
+  --borderColor-default: transparent;
+  --bgColor-muted: transparent;
+  --bgColor-default: transparent;
+  --fgColor-default: var(--fg);
+  --fgColor-muted: var(--muted);
+
+  /* Syntax highlighting: monochrome plus red, readable on black */
+  --color-prettylights-syntax-comment: #7A7A7A;
+  --color-prettylights-syntax-constant: #F4F4F4;
+  --color-prettylights-syntax-entity: #F4F4F4;
+  --color-prettylights-syntax-entity-tag: #F0362A;
+  --color-prettylights-syntax-keyword: #F0362A;
+  --color-prettylights-syntax-string: #D9D9D9;
+  --color-prettylights-syntax-variable: #C9C9C9;
+  --color-prettylights-syntax-brackethighlighter-angle: #8A8A8A;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #F0362A;
+  --color-prettylights-syntax-carriage-return-bg: #F0362A;
+  --color-prettylights-syntax-carriage-return-text: #F4F4F4;
+  --color-prettylights-syntax-markup-heading: #F0362A;
+  --color-prettylights-syntax-markup-bold: #F4F4F4;
+  --color-prettylights-syntax-markup-italic: #D9D9D9;
+  --color-prettylights-syntax-markup-list: #F0362A;
+  --color-prettylights-syntax-storage-modifier-import: #C9C9C9;
+  --color-prettylights-syntax-string-regexp: #D9D9D9;
+}
+
+/* ============================================
+   BASE SLIDE
+   ============================================ */
+
+section {
+  width: 1280px;
+  height: 720px;
+  font-family: 'JetBrains Mono', 'Menlo', monospace;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.55;
+  padding: 64px 72px;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+/* ============================================
+   HEADINGS - markdown syntax stays visible
+   ============================================ */
+
+section h1 {
+  font-size: 1.9em;
+  font-weight: 800;
+  color: var(--fg);
+  margin-bottom: 26px;
+  line-height: 1.15;
+}
+
+section h1::before {
+  content: '# ';
+}
+
+section h2 {
+  font-size: 1.15em;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 18px;
+  line-height: 1.35;
+}
+
+section h2::before {
+  content: '## ';
+}
+
+section h3 {
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+section h3::before {
+  content: '### ';
+}
+
+/* ============================================
+   BODY TEXT, LINKS, EMPHASIS
+   ============================================ */
+
+section p {
+  margin-bottom: 16px;
+  color: var(--fg);
+}
+
+section a {
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+section a::before {
+  content: '[';
+}
+
+section a::after {
+  content: '](' attr(href) ')';
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* **strong** goes red and grows a little - the deck's highlighter pen */
+section strong {
+  font-weight: 800;
+  font-size: 1.12em;
+  color: var(--accent);
+}
+
+/* _em_ is bold white, not italic - mono italics look wrong here */
+section em {
+  font-style: normal;
+  font-weight: 800;
+  color: var(--fg);
+}
+
+/* ============================================
+   LISTS - asterisks, like the source
+   ============================================ */
+
+section ul,
+section ol {
+  margin-bottom: 16px;
+  padding-left: 1.7em;
+  color: var(--fg);
+}
+
+section li {
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+section ul > li::marker {
+  content: '* ';
+  color: var(--fg);
+}
+
+section ul ul > li::marker {
+  content: '- ';
+  color: var(--muted);
+}
+
+section ol > li::marker {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ============================================
+   CODE
+   ============================================ */
+
+/* Inline code keeps its backticks */
+section :not(pre) > code {
+  font-family: 'JetBrains Mono', 'Menlo', monospace;
+  font-size: 0.9em;
+  font-weight: 700;
+  background: transparent;
+  padding: 0;
+  color: var(--accent);
+}
+
+section :not(pre) > code::before,
+section :not(pre) > code::after {
+  content: '`';
+  color: var(--muted);
+}
+
+/* Code blocks: black on black, held in by a wobbly red border */
+section pre {
+  background-color: var(--bg);
+  border: 3px solid var(--accent);
+  border-radius: 15px 4px 12px 5px / 5px 12px 4px 15px;
+  padding: 24px 30px;
+  margin: 20px 0;
+  overflow: visible;
+}
+
+section pre code {
+  background: transparent;
+  color: var(--fg);
+  font-size: 0.68em;
+  font-weight: 600;
+  line-height: 1.6;
+  padding: 0;
+  border: none;
+}
+
+/* The $ prompt in ```console fences */
+section pre .hljs-meta,
+section pre .hljs-meta.prompt_ {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+/* ============================================
+   BLOCKQUOTES - a red > instead of a border
+   ============================================ */
+
+section blockquote {
+  border: none !important;
+  background: transparent;
+  padding: 0 0 0 1.4em;
+  margin: 24px 0;
+}
+
+section blockquote p {
+  color: var(--fg);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+section blockquote p::before {
+  content: '> ';
+  color: var(--accent);
+  font-weight: 800;
+  margin-left: -1.4em;
+}
+
+/* ============================================
+   TABLES - pipes and dashes, near enough
+   ============================================ */
+
+section table {
+  border-collapse: collapse;
+  font-size: 0.78em;
+  margin: 20px 0;
+}
+
+section table th {
+  color: var(--fg);
+  font-weight: 800;
+  padding: 10px 22px;
+  text-align: left;
+  border-bottom: 2px dashed var(--muted);
+}
+
+section table td {
+  padding: 10px 22px;
+  color: var(--fg-dim);
+}
+
+section table th:not(:last-child),
+section table td:not(:last-child) {
+  border-right: 2px solid var(--faint);
+}
+
+section table tr {
+  background-color: transparent !important;
+}
+
+/* ============================================
+   HORIZONTAL RULE
+   ============================================ */
+
+section hr {
+  border: none;
+  border-top: 3px dashed var(--faint);
+  margin: 28px 0;
+}
+
+/* ============================================
+   IMAGES
+   ============================================ */
+
+section img {
+  border-radius: 0;
+}
+
+img[alt~='center'] {
+  display: block;
+  margin: 0 auto;
+}
+
+/* ============================================
+   HEADER, FOOTER, PAGINATION
+   ============================================ */
+
+header,
+footer {
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--faint);
+}
+
+header {
+  top: 24px;
+}
+
+footer {
+  bottom: 24px;
+}
+
+section::after {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--faint);
+  bottom: 24px;
+  right: 72px;
+}
+
+/* ============================================
+   TITLE SLIDE - use class "title"
+   Use a NORMAL image (![](img.jpg)), not a bg
+   split - Marp clips split-background content
+   at the halfway line, and the whole point is
+   the tilted h2 banner crossing the image.
+   The theme pins the image as the right panel;
+   the h2 becomes a black band of red text that
+   runs over it.
+   ============================================ */
+
+section.title {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding-right: 42%;
+}
+
+section.title img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  height: 720px;
+  object-fit: cover;
+  margin: 0;
+}
+
+section.title p:has(img) {
+  margin: 0;
+}
+
+section.title h1 {
+  font-size: 2.4em;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+section.title h2 {
+  position: relative;
+  z-index: 1;
+  background-color: var(--bg);
+  padding: 22px 90px 22px 0;
+  margin: 18px -110% 26px 0;
+  transform: rotate(-3deg);
+  transform-origin: left center;
+  line-height: 1.5;
+}
+
+section.title p {
+  font-size: 0.72em;
+  color: var(--fg);
+  margin-bottom: 0;
+}
+
+section.title p:last-of-type {
+  margin-top: auto;
+}
+
+/* ============================================
+   LEAD / SECTION-BREAK SLIDE - use class "lead"
+   Centred, and drops the # conceit for impact.
+   ============================================ */
+
+section.lead {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+section.lead h1 {
+  font-size: 3.4em;
+  margin-bottom: 8px;
+}
+
+section.lead h1::before {
+  content: none;
+}
+
+section.lead h2 {
+  color: var(--fg);
+  font-size: 1.05em;
+}
+
+section.lead h2::before {
+  content: none;
+}
+
+section.lead p {
+  color: var(--fg-dim);
+  font-size: 0.9em;
+}
+
+/* ============================================
+   QUOTES SLIDE - use class "quotes"
+   Blockquotes stagger left and right down the
+   slide, like the Keynote original.
+   ============================================ */
+
+section.quotes {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+section.quotes blockquote {
+  max-width: 78%;
+  margin: 14px 0;
+  padding-left: 0;
+}
+
+section.quotes blockquote p::before {
+  content: none;
+}
+
+section.quotes blockquote:nth-of-type(even) {
+  align-self: flex-end;
+  text-align: right;
+}
+
+/* ============================================
+   LIGHT SLIDE - use class "light"
+   Paper-white break slide; red stays red.
+   ============================================ */
+
+section.light {
+  background-color: #F2F0EC;
+  color: #111111;
+}
+
+section.light h1,
+section.light p,
+section.light li,
+section.light a,
+section.light em,
+section.light blockquote p {
+  color: #111111;
+}
+
+section.light ul > li::marker {
+  content: '* ';
+  color: #111111;
+}
+
+section.light h3 {
+  color: #6A6A6A;
+}
+
+section.light pre {
+  background-color: #050505;
+}
+
+section.light pre code {
+  color: #F4F4F4;
+}
+
+section.light table th,
+section.light table td {
+  color: #111111;
+}
+
+section.light::after,
+section.light header,
+section.light footer {
+  color: #9A9A9A;
+}
+
+/* ============================================
+   TWO-COLUMN HELPER - use class "cols"
+   ============================================ */
+
+section.cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 0 48px;
+  align-items: start;
+}
+
+section.cols h1,
+section.cols h2 {
+  grid-column: 1 / -1;
+}
