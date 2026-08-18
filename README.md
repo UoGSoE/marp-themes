@@ -1,6 +1,6 @@
 # Marp themes
 
-Four custom themes for [Marp](https://marp.app/), plus demo decks and two Claude Code skills, one for building decks and one for designing new themes. Marp decks are plain markdown, so they can be versioned and reviewed like any other code.
+Four custom themes for [Marp](https://marp.app/) presentations, plus demo decks and two Claude Code skills, one for building decks and one for designing new themes.
 
 ## The themes
 
