@@ -44,6 +44,8 @@
   --borderColor-default: transparent;
   --bgColor-muted: transparent;
   --bgColor-default: transparent;
+  /* Bold inside h2-h6 otherwise renders in the default theme's blue */
+  --heading-strong-color: var(--color-heading);
 
   /* Syntax highlighting — readable on dark navy code blocks */
   --color-prettylights-syntax-comment: #8B95A8;
@@ -180,13 +182,11 @@ section code {
   font-size: 0.82em;
   background-color: var(--surface-cream);
   padding: 2px 8px;
-  border-radius: 4px;
   color: var(--uofg-university-blue);
 }
 
 section pre {
   background-color: var(--surface-deep);
-  border-radius: 10px;
   padding: 28px 32px;
   margin: 20px 0;
   overflow: visible;
@@ -208,7 +208,6 @@ section pre code {
 section blockquote {
   background-color: var(--accent-gold-soft);
   border: none !important;
-  border-radius: 10px;
   padding: 24px 32px;
   margin: 24px 0;
   position: relative;
@@ -257,14 +256,6 @@ section table th {
   letter-spacing: 0.02em;
 }
 
-section table th:first-child {
-  border-radius: 8px 0 0 0;
-}
-
-section table th:last-child {
-  border-radius: 0 8px 0 0;
-}
-
 section table td {
   padding: 11px 18px;
   border-bottom: 1px solid var(--surface-cream);
@@ -277,10 +268,6 @@ section table tr {
 /* ============================================
    IMAGES
    ============================================ */
-
-section img {
-  border-radius: 8px;
-}
 
 img[alt~="center"] {
   display: block;
@@ -312,6 +299,16 @@ footer {
   color: var(--ink-muted);
 }
 
+/* Header and footer need lighter ink on the dark slide classes */
+section.lead header,
+section.highlight header,
+section.invert header,
+section.lead footer,
+section.highlight footer,
+section.invert footer {
+  color: var(--uofg-blue-40);
+}
+
 /* ============================================
    PAGINATION
    ============================================ */
@@ -328,6 +325,17 @@ section::after {
 /* ============================================
    TITLE / LEAD SLIDES
    ============================================ */
+
+/* Gold keyline: ties the big moments to the accent used in the body */
+section.lead h1::before,
+section.divider h1::before {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 5px;
+  background-color: var(--accent-gold);
+  margin-bottom: 24px;
+}
 
 section.lead {
   display: flex;
@@ -434,17 +442,18 @@ section.invert::after {
 section.divider {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: flex-start;
   background-color: var(--surface-cream);
-  padding: 64px 84px;
+  padding: 64px 84px 88px;
 }
 
 section.divider h1 {
   font-family: 'Literata', Georgia, serif;
-  font-size: 2.2em;
+  font-size: 2.6em;
   font-weight: 800;
   color: var(--uofg-university-blue);
+  line-height: 1.1;
 }
 
 section.divider h2 {

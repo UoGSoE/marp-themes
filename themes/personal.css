@@ -319,7 +319,9 @@ footer {
    PAGINATION
    ============================================ */
 
-section::after {
+/* Shows "4 / 13" so the audience knows where they are in the deck */
+section[data-marpit-pagination]::after {
+  content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   color: var(--ink-faint);
@@ -440,20 +442,22 @@ section.light ol > li::marker {
    SECTION DIVIDER — use class "divider"
    ============================================ */
 
+/* Warm paper break in a dark deck: a chapter page you can feel */
 section.divider {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: flex-start;
-  background-color: var(--bg-surface);
-  padding: 60px 80px;
+  background-color: #F5F0EB;
+  color: #1C1917;
+  padding: 60px 80px 84px;
 }
 
 section.divider h1 {
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 2.4em;
+  font-size: 2.8em;
   font-weight: 800;
-  color: var(--ink-primary);
+  color: #1C1917;
   letter-spacing: -0.04em;
 }
 
@@ -461,7 +465,7 @@ section.divider h2 {
   font-family: 'Hanken Grotesk', sans-serif;
   font-weight: 400;
   font-size: 1em;
-  color: var(--ink-muted);
+  color: var(--accent-dim);
   text-transform: none;
   letter-spacing: 0;
 }
